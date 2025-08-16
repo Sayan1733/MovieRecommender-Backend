@@ -2,13 +2,19 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pickle
 import requests
-
+import os
 app = Flask(__name__)
 CORS(app)
 
 # Load movies & similarity
-movies = pickle.load(open('movies.pkl', 'rb'))
-similarity = pickle.load(open('similarity.pkl', 'rb'))
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(BASE_DIR, "movies.pkl"), "rb") as f:
+    movies = pickle.load(f)
+
+with open(os.path.join(BASE_DIR, "similarity.pkl"), "rb") as f:
+    similarity = pickle.load(f)
 
 # TMDB poster fetch function
 def fetch_poster(movie_id):
