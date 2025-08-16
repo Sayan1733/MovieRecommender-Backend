@@ -7,8 +7,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Load movies & similarity
-movies = pickle.load(open(r'C:\Users\kekad\OneDrive\Desktop\MovieRecommender Backend\movies.pkl', 'rb'))
-similarity = pickle.load(open(r'C:\Users\kekad\OneDrive\Desktop\MovieRecommender Backend\similarity.pkl', 'rb'))
+movies = pickle.load(open('movies.pkl', 'rb'))
+similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 # TMDB poster fetch function
 def fetch_poster(movie_id):
