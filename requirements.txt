@@ -2,3 +2,7 @@ flask
 flask-cors
 requests
 pickle-mixin
+Flask
+numpy
+pandas
+scikit-learn
