@@ -3,19 +3,28 @@ from flask_cors import CORS
 import pickle
 import requests
 import os
+import gdown
 app = Flask(__name__)
 CORS(app)
 
 # Load movies & similarity
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+movie_file = "movies.pkl"
+if not os.path.exists(movie_file):
+    url = "https://drive.google.com/uc?id=1HJXCa7frc4zPkJQgUw0wbcdWQ4JA_L3b"  # replace with actual FILE_ID
+    gdown.download(url, movie_file, quiet=False)
 
-with open(os.path.join(BASE_DIR, "movies.pkl"), "rb") as f:
+with open(movie_file, "rb") as f:
     movies = pickle.load(f)
 
-with open(os.path.join(BASE_DIR, "similarity.pkl"), "rb") as f:
-    similarity = pickle.load(f)
+# Similarity PKL
+similarity_file = "similarity.pkl"
+if not os.path.exists(similarity_file):
+    url = "https://drive.google.com/uc?id=1OWWhhJl0nOQ3GGunNLG2SMLF0QoAOnMJ"
+    gdown.download(url, similarity_file, quiet=False)
 
+with open(similarity_file, "rb") as f:
+    similarity = pickle.load(f)
 # TMDB poster fetch function
 def fetch_poster(movie_id):
     response = requests.get(
